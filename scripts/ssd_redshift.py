@@ -1,30 +1,37 @@
+import os
 import numpy as np
+import matplotlib.pyplot as plt
 
-from ssd_core import a_eff
-
-
-def redshift_from_aeff(a):
-    """
-    Convert effective scale factor to redshift:
-    z = 1/a - 1
-    """
-    return (1.0 / a) - 1.0
+from ssd_core import SSDParameters, sigma, a_eff, H
+from ssd_redshift import z_of_t
 
 
-def z_of_t(t, params):
-    """
-    Compute redshift as a function of t
-    using the SSD effective scale factor.
-    """
+def main():
+    t = np.linspace(0.1, 2.0, 200)
+    params = SSDParameters(A=1.0, B=1.0)
+
+    s = sigma(t, params)
     a = a_eff(t, params)
-    return redshift_from_aeff(a)
+    h = H(t, params)
+    z = z_of_t(t, params)
+
+    os.makedirs("results", exist_ok=True)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(t, s, label="sigma(t)")
+    plt.plot(t, a, label="a_eff(t)")
+    plt.plot(t, h, label="H(t)")
+    plt.plot(t, z, label="z(t)")
+    plt.xlabel("t")
+    plt.ylabel("value")
+    plt.title("SSD demo")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("results/ssd_demo_plot.png", dpi=150)
+    plt.close()
+
+    print("Saved: results/ssd_demo_plot.png")
 
 
 if __name__ == "__main__":
-    from ssd_core import SSDParameters
-
-    t = np.linspace(0.1, 2.0, 10)
-    params = SSDParameters()
-
-    z = z_of_t(t, params)
-    print("z(t) sample:", z)
+    main()
