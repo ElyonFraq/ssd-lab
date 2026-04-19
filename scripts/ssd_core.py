@@ -13,18 +13,18 @@ class SSDParameters:
 
 def Se(t, params):
     """
-    Extraction component (Se).
-    Placeholder definition.
+    Extraction component (Se)
+    decaying behavior
     """
-    return params.A * np.ones_like(t)
+    return params.A / (1.0 + t)
 
 
 def Sa(t, params):
     """
-    Expansion component (Sa).
-    Placeholder definition.
+    Expansion component (Sa)
+    accelerating behavior
     """
-    return params.B * (1 + t)
+    return params.B * np.exp(0.5 * t)
 
 
 def sigma(t, params):
