@@ -2,7 +2,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-from ssd_core import SSDParameters, sigma, a_eff, H
+from scripts.ssd_core import SSDParameters, sigma, a_eff, H
+from scripts.ssd_redshift import z_of_t
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
     s = sigma(t, params)
     a = a_eff(t, params)
     h = H(t, params)
+    z = z_of_t(t, params)
 
     os.makedirs("results", exist_ok=True)
 
@@ -19,6 +21,7 @@ def main():
     plt.plot(t, s, label="sigma(t)")
     plt.plot(t, a, label="a_eff(t)")
     plt.plot(t, h, label="H(t)")
+    plt.plot(t, z, label="z(t)")
     plt.xlabel("t")
     plt.ylabel("value")
     plt.title("SSD demo")
