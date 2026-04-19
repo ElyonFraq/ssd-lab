@@ -66,11 +66,18 @@ Examples:
 
 Phenomenology must never be presented as core physics.
 
----## Current Documentation
+## Current Documentation
 
-- `docs/model_core.md` — current SSD core working definition
-- `docs/roadmap.md` — phased build plan for the repository
+This repository currently contains two core documents:
 
+- `docs/model_core.md`  
+  → defines the current SSD core equations and structure
+
+- `docs/roadmap.md`  
+  → defines the step-by-step plan for how this project will be built
+
+If you want to understand the model → start with model_core.md  
+If you want to understand the project → read roadmap.md
 ## Repository Structure
 
 ```text
